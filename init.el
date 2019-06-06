@@ -60,6 +60,9 @@ There are two things you can do about this warning:
 ; Hack Font
 (set-face-attribute 'default t :font "Hack 14")
 
+; Open buffer menu in same window (keybind)
+(global-set-key (kbd "C-x C-b") 'buffer-menu)
+
 ; Customize
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
