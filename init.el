@@ -57,6 +57,9 @@ There are two things you can do about this warning:
 ; Dracula Theme
 (load-theme 'dracula t)
 
+; Hack Font
+(set-face-attribute 'default t :font "Hack 14")
+
 ; Customize
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
