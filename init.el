@@ -60,13 +60,18 @@
     (when goimports
       (setq gofmt-command goimports))))
 
+
+(global-set-key (kbd "C-c f") 'origami-recursively-toggle-node)
+(global-set-key (kbd "C-c v") 'origami-show-only-node)
+(global-set-key (kbd "C-c F") 'origami-toggle-all-nodes)
+
 ;; Customize
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (go-mode dracula-theme))))
+ '(package-selected-packages (quote (origami go-mode dracula-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
