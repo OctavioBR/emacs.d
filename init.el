@@ -52,6 +52,7 @@
 
 ;; Open buffer menu in same window (keybind)
 (global-set-key (kbd "C-x C-b") 'buffer-menu)
+(global-unset-key (kbd "<C-down-mouse-1>")) ; disable mouse buffer menu
 
 ;; Applies goimports (if executabvle available, otherwise fmt) before saving go code
 (with-eval-after-load 'go-mode
