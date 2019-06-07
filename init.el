@@ -53,8 +53,12 @@
 ;; Open buffer menu in same window (keybind)
 (global-set-key (kbd "C-x C-b") 'buffer-menu)
 
-;; Go development
-;; TODO
+;; Applies goimports (if executabvle available, otherwise fmt) before saving go code
+(with-eval-after-load 'go-mode
+  (add-hook 'before-save-hook 'gofmt-before-save)
+  (let ((goimports (executable-find "goimports")))
+    (when goimports
+      (setq gofmt-command goimports))))
 
 ;; Customize
 (custom-set-variables
@@ -62,7 +66,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (dracula-theme))))
+ '(package-selected-packages (quote (go-mode dracula-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
