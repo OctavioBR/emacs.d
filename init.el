@@ -54,17 +54,20 @@
 (global-set-key (kbd "C-x C-b") 'buffer-menu)
 (global-unset-key (kbd "<C-down-mouse-1>")) ; disable mouse buffer menu
 
-;; Applies goimports (if executabvle available, otherwise fmt) before saving go code
+;; Applies goimports (if executable available, otherwise fmt) before saving go code
 (with-eval-after-load 'go-mode
   (add-hook 'before-save-hook 'gofmt-before-save)
   (let ((goimports (executable-find "goimports")))
     (when goimports
       (setq gofmt-command goimports))))
 
-
+;; Origami-mode keybindings
 (global-set-key (kbd "C-c f") 'origami-recursively-toggle-node)
 (global-set-key (kbd "C-c v") 'origami-show-only-node)
 (global-set-key (kbd "C-c F") 'origami-toggle-all-nodes)
+
+;; Flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; Customize
 (custom-set-variables
@@ -72,10 +75,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (origami go-mode dracula-theme))))
+ '(package-selected-packages (quote (flycheck sudo-edit origami go-mode dracula-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:inherit nil :stipple nil :background "#282a36" :foreground "#f8f8f2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 130 :width normal :foundry "SRC" :family "Hack")))))
+ '(default ((t (:inherit nil :stipple nil :background "#282a36" :foreground "#f8f8f2" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "SRC" :family "Hack")))))
