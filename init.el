@@ -47,6 +47,38 @@
 ;; Go autocomplete
 (require 'go-autocomplete)
 (require 'auto-complete-config)
+
+;;------------------------- JS -------------------------;;
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;; Better imenu
+(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+
+(require 'js2-refactor)
+(require 'xref-js2)
+
+(add-hook 'js2-mode-hook #'js2-refactor-mode)
+(js2r-add-keybindings-with-prefix "C-c C-r")
+(define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+
+;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
+;; unbind it.
+(define-key js-mode-map (kbd "M-.") nil)
+
+(add-hook 'js2-mode-hook (lambda ()
+  (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+
+(require 'company)
+(require 'company-tern)
+
+(add-to-list 'company-backends 'company-tern)
+(add-hook 'js2-mode-hook (lambda ()
+                           (tern-mode)
+                           (company-mode)))
+;; Disable completion keybindings, xref-js2 is used instead
+(define-key tern-mode-keymap (kbd "M-.") nil)
+(define-key tern-mode-keymap (kbd "M-,") nil)
+
 ;;------------------------------------------------------;;
 (ac-config-default)
 
@@ -116,7 +148,7 @@
 	("274fa62b00d732d093fc3f120aca1b31a6bb484492f31081c1814a858e25c72e" default)))
  '(package-selected-packages
    (quote
-	(markdown-mode wakatime-mode exec-path-from-shell auto-complete flycheck-color-mode-line flycheck sudo-edit origami go-mode dracula-theme))))
+	(company-tern yasnippet xref-js2 js2-refactor js2-mode markdown-mode wakatime-mode exec-path-from-shell auto-complete flycheck-color-mode-line flycheck sudo-edit origami go-mode dracula-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
